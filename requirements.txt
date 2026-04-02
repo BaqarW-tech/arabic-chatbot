@@ -1,0 +1,12 @@
+# Arabic Q&A Bot - Dependencies
+# Install with: pip install -r requirements.txt
+
+transformers==4.35.2
+streamlit>=1.28.0
+pyngrok>=7.0.0
+arabert>=1.0.1
+PyArabic>=0.6.14
+farasapy>=0.0.14
+emoji==1.4.2
+torch>=2.0.0
+sentencepiece>=0.1.99
