@@ -1,7 +1,9 @@
-# Arabic Q&A Bot — Lightweight Version
-# No Hugging Face, no Torch, no compiled packages
+# Arabic Q&A Bot — Semantic Search Version
 
 streamlit>=1.32.0
-scikit-learn>=1.4.0
-pandas>=2.2.0
 numpy>=1.26.0
+pandas>=2.2.0
+scikit-learn>=1.4.0
+tashaphyne>=0.3.6
+arabicstopwords>=0.4.3
+sentence-transformers>=2.7.0
