@@ -1,10 +1,10 @@
 # 🤖 Arabic Q&A Bot | بوت الأسئلة والأجوبة العربي
 
-A lightweight Arabic Question Answering chatbot built with **Streamlit and TF-IDF similarity**.
+A lightweight Arabic Question Answering chatbot built using **Streamlit and TF-IDF similarity**.
 
-Users can paste Arabic text, ask a question about it, and the app returns the most relevant sentence from the text.
+Users can paste Arabic text, ask a question about it, and the system returns the most relevant sentence from the text.
 
-This version is optimized for **Streamlit Cloud deployment** and avoids heavy machine learning frameworks.
+This version avoids heavy machine learning frameworks and runs smoothly on **Streamlit Cloud**.
 
 ---
 
@@ -23,21 +23,23 @@ Startup time: **under 5 seconds**.
 | Component | Tool |
 |---|---|
 | Web UI | Streamlit |
-| QA Engine | TF-IDF Similarity |
-| NLP Processing | Python Regex |
-| Vectorization | scikit-learn |
+| NLP Processing | Python + Regex |
+| Sentence Ranking | TF-IDF |
+| Similarity Metric | Cosine Similarity |
+| Arabic Processing | Tashaphyne Stemmer |
 
 ---
 
 # ⚙️ How It Works
 
 1. User enters Arabic text
-2. Text is split into sentences
-3. TF-IDF vectors are created
-4. Cosine similarity compares question with sentences
-5. The most similar sentence is returned as the answer
+2. Text is cleaned and split into sentences
+3. Words are stemmed using an Arabic stemmer
+4. TF-IDF vectors are created
+5. Cosine similarity compares the question with each sentence
+6. The most relevant sentence is returned as the answer
 
-This approach avoids heavy transformer models while still providing useful answers.
+This method is lightweight and suitable for cloud deployment.
 
 ---
 
