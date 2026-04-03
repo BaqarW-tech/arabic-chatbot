@@ -1,9 +1,5 @@
-# Arabic Q&A Bot — Semantic Search Version
-
-streamlit>=1.32.0
-numpy>=1.26.0
+streamlit>=1.40.0
+numpy>=2.1.0
 pandas>=2.2.0
-scikit-learn>=1.4.0
+scikit-learn>=1.5.0
 tashaphyne>=0.3.6
-arabicstopwords>=0.4.3
-sentence-transformers>=2.7.0
