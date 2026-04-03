@@ -2,25 +2,86 @@ import streamlit as st
 import re
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
+from tashaphyne.stemming import ArabicLightStemmer
+
+# -------------------------
+# Page Config
+# -------------------------
 
 st.set_page_config(page_title="Arabic Q&A Bot", page_icon="🤖")
+
+# -------------------------
+# RTL Layout
+# -------------------------
+
+st.markdown("""
+<style>
+body {
+direction: RTL;
+text-align: right;
+}
+textarea, input {
+direction: RTL;
+text-align: right;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# -------------------------
+# Title
+# -------------------------
 
 st.title("🤖 أجب عن سؤالي")
 st.markdown("اكتب نصاً عربياً، ثم اسألني سؤالاً عنه!")
 
+st.info(
+"""
+مثال للاستخدام:
+
+النص: القاهرة هي عاصمة مصر وتقع على نهر النيل.
+
+السؤال: ما هي عاصمة مصر؟
+"""
+)
+
 # -------------------------
-# Text Cleaning
+# Arabic Stemmer
+# -------------------------
+
+stemmer = ArabicLightStemmer()
+
+# -------------------------
+# Cleaning Arabic Text
 # -------------------------
 
 def clean_arabic(text):
+
     text = re.sub(r'[^\u0600-\u06FF\s]', '', text)
+    text = re.sub(r'\s+', ' ', text)
+
     return text.strip()
+
+# -------------------------
+# Arabic Stemming
+# -------------------------
+
+def stem_text(text):
+
+    words = text.split()
+    stems = []
+
+    for w in words:
+        stemmer.light_stem(w)
+        stems.append(stemmer.get_stem())
+
+    return " ".join(stems)
 
 # -------------------------
 # Sentence Split
 # -------------------------
 
 def split_sentences(text):
+
     sentences = re.split(r'[.!؟\n]', text)
     return [s.strip() for s in sentences if s.strip()]
 
@@ -30,55 +91,5 @@ def split_sentences(text):
 
 def find_answer(context, question):
 
-    sentences = split_sentences(clean_arabic(context))
-    question = clean_arabic(question)
-
-    if len(sentences) == 0:
-        return None, 0
-
-    corpus = sentences + [question]
-
-    vectorizer = TfidfVectorizer()
-    vectors = vectorizer.fit_transform(corpus)
-
-    similarity = cosine_similarity(vectors[-1], vectors[:-1])
-
-    best_idx = similarity.argmax()
-    best_score = similarity[0][best_idx]
-
-    return sentences[best_idx], float(best_score)
-
-# -------------------------
-# UI
-# -------------------------
-
-context = st.text_area(
-    "📄 النص (Context)",
-    height=200,
-    placeholder="اكتب النص العربي هنا..."
-)
-
-question = st.text_input(
-    "❓ سؤالك (Question)",
-    placeholder="ماذا تريد أن تسأل؟"
-)
-
-if st.button("🤖 احصل على الجواب"):
-
-    if context and question:
-
-        with st.spinner("🤔 جاري البحث عن الإجابة..."):
-
-            answer, score = find_answer(context, question)
-
-            if answer:
-
-                st.success("✨ الإجابة:")
-                st.markdown(f">>> {answer}")
-                st.caption(f"درجة التشابه: {score:.2f}")
-
-            else:
-                st.warning("لم يتم العثور على إجابة مناسبة.")
-
-    else:
-        st.warning("⚠️ من فضلك اكتب النص والسؤال")
+    context = clean_arabic(context)
+    question = clean_ar
