@@ -8,7 +8,7 @@ This version avoids heavy machine learning frameworks and runs smoothly on **Str
 
 ---
 
-# 🚀 Live Demo
+#  Live Demo
 
 Deploy instantly on Streamlit Cloud.
 
@@ -18,7 +18,7 @@ Startup time: **under 5 seconds**.
 
 ---
 
-# 🛠 Tech Stack
+#  Tech Stack
 
 | Component | Tool |
 |---|---|
@@ -30,7 +30,7 @@ Startup time: **under 5 seconds**.
 
 ---
 
-# ⚙️ How It Works
+#  How It Works
 
 1. User enters Arabic text
 2. Text is cleaned and split into sentences
@@ -41,6 +41,3 @@ Startup time: **under 5 seconds**.
 
 This method is lightweight and suitable for cloud deployment.
 
----
-
-# 📂 Project Structure
